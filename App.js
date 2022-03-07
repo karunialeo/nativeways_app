@@ -1,6 +1,7 @@
 import { extendTheme, NativeBaseProvider, StatusBar } from "native-base";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { SSRProvider } from "@react-aria/ssr";
 
 import {
   Poppins_400Regular,
@@ -9,7 +10,21 @@ import {
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
 
+import {
+  Montserrat_400Regular,
+  Montserrat_400Regular_Italic,
+  Montserrat_600SemiBold,
+  Montserrat_600SemiBold_Italic,
+  Montserrat_700Bold,
+  Montserrat_700Bold_Italic,
+} from "@expo-google-fonts/montserrat";
+
 import Container from "./Container";
+
+import {
+  AddListModalProvider,
+  ShowListModalProvider,
+} from "./src/contexts/ModalContext";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -17,6 +32,12 @@ export default function App() {
     Poppins_400Regular_Italic,
     Poppins_600SemiBold,
     Poppins_700Bold,
+    Montserrat_400Regular,
+    Montserrat_400Regular_Italic,
+    Montserrat_600SemiBold,
+    Montserrat_600SemiBold_Italic,
+    Montserrat_700Bold,
+    Montserrat_700Bold_Italic,
   });
 
   const fontConfig = {
@@ -32,26 +53,24 @@ export default function App() {
         normal: "Poppins_700Bold",
       },
     },
-  };
-
-  const customColors = {
-    primary: {
-      50: "#fafaf9",
-      100: "#f5f5f4",
-      200: "#e7e5e4",
-      300: "#d6d3d1",
-      400: "#a8a29e",
-      500: "#78716c",
-      600: "#57534e",
-      700: "#44403c",
-      800: "#292524",
-      900: "#1c1917",
+    Montserrat: {
+      400: {
+        normal: "Montserrat_400Regular",
+        italic: "Montserrat_400Regular_Italic",
+      },
+      600: {
+        normal: "Montserrat_600SemiBold",
+        italic: "Montserrat_600SemiBold_Italic",
+      },
+      700: {
+        normal: "Montserrat_700Bold",
+        italic: "Montserrat_700Bold_Italic",
+      },
     },
   };
 
   // Configuration Native Base Custom Theme
   const customTheme = extendTheme({
-    colors: customColors,
     components: {
       Button: {
         defaultProps: {
@@ -62,20 +81,27 @@ export default function App() {
           height: 12,
           borderRadius: 7,
           marginBottom: 3,
-          bg: "gray.200",
+          bg: "primary.200",
           _text: {
-            color: "gray.700",
+            color: "primary.700",
             fontWeight: "bold",
           },
           _pressed: {
-            bg: "gray.300",
+            bg: "primary.300",
           },
+        },
+      },
+      Text: {
+        defaultProps: {
+          color: "black",
+          fontFamily: "Montserrat",
         },
       },
     },
     fontConfig,
     fonts: {
       Poppins: "Poppins",
+      Montserrat: "Montserrat",
     },
     config: {
       initialColorMode: "dark",
@@ -86,10 +112,16 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <NativeBaseProvider theme={customTheme}>
-        <StatusBar backgroundColor="white" barStyle="dark-content" />
-        <Container />
-      </NativeBaseProvider>
+      <SSRProvider>
+        <NativeBaseProvider theme={customTheme}>
+          <AddListModalProvider>
+            <ShowListModalProvider>
+              <StatusBar backgroundColor="white" barStyle="dark-content" />
+              <Container />
+            </ShowListModalProvider>
+          </AddListModalProvider>
+        </NativeBaseProvider>
+      </SSRProvider>
     );
   }
 }

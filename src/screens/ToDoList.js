@@ -1,23 +1,134 @@
-import React from "react";
-import { Text, VStack, ScrollView } from "native-base";
-import { ListItem } from "react-native-elements";
+import React, { useContext, useState } from "react";
+import {
+  Text,
+  ScrollView,
+  Pressable,
+  useTheme,
+  Center,
+  Modal,
+} from "native-base";
+import { Ionicons } from "@expo/vector-icons";
+
+import { tempDB } from "../../tempData/tempDB";
+import AddListModal from "../components/AddListModal";
+import ToDoModal from "../components/ToDoModal";
+
+import {
+  AddListModalContext,
+  ShowListModalContext,
+} from "../contexts/ModalContext";
 
 export default function ToDoList() {
+  const theme = useTheme();
+  const [showModal, setShowModal] = useContext(AddListModalContext);
+  const [showListModal, setShowListModal] = useContext(ShowListModalContext);
+  const [list, setList] = useState({});
+
+  const toggleShowListModal = () => {
+    setShowListModal(!showListModal);
+  };
+
+  const handlePress = (id) => {
+    toggleShowListModal();
+    setList(
+      tempDB.find((obj) => {
+        return obj.id === id;
+      })
+    );
+  };
+
   return (
-    <ScrollView backgroundColor="white">
-      <Text color="gray.500" fontSize="md" padding={4} fontFamily="Poppins">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam cupiditate
-        nostrum beatae reiciendis in quis vel molestiae, tempora, sit,
-        praesentium libero aspernatur quod explicabo. Sed saepe pariatur commodi
-        laboriosam molestiae magni voluptas, atque amet officia nihil architecto
-        illum repellendus aut provident fugiat ea fugit. Nesciunt nam velit
-        neque, nobis distinctio nulla corporis quos est id laudantium voluptates
-        dolorum esse! Omnis nihil soluta, nobis, molestias cupiditate fuga
-        libero natus assumenda incidunt voluptas deleniti pariatur perferendis
-        ipsum modi officiis consectetur eaque cum aliquid mollitia. Eum expedita
-        repellendus tempore harum. Vel, nihil? Expedita ex blanditiis sed cumque
-        architecto ad rerum, cupiditate laboriosam optio?
-      </Text>
-    </ScrollView>
+    <>
+      <Center backgroundColor="white" height="100%">
+        <ScrollView
+          maxHeight={72}
+          marginX={2}
+          marginBottom={12}
+          horizontal={true}
+        >
+          {tempDB.map((temp) => (
+            <Pressable
+              onPress={() => handlePress(temp.id)}
+              height={72}
+              borderRadius={10}
+              marginRight={5}
+              bg={temp.color}
+              width={48}
+              padding={5}
+              key={temp.id}
+            >
+              <Text
+                color="white"
+                textAlign="center"
+                fontSize="md"
+                fontWeight="bold"
+                paddingBottom={4}
+                numberOfLines={1}
+              >
+                {temp.name}
+              </Text>
+              <Text color="white" textAlign="center" paddingBottom={3}>
+                Remaining
+              </Text>
+              <Text
+                color="white"
+                textAlign="center"
+                fontSize="3xl"
+                paddingBottom={3}
+              >
+                {temp.todos.length -
+                  temp.todos.filter((todo) => todo.completed).length}
+              </Text>
+              <Text color="white" textAlign="center" paddingBottom={3}>
+                Completed
+              </Text>
+              <Text
+                color="white"
+                textAlign="center"
+                fontSize="3xl"
+                paddingBottom={3}
+              >
+                {temp.todos.filter((todo) => todo.completed).length}
+              </Text>
+            </Pressable>
+          ))}
+        </ScrollView>
+        <Pressable
+          onPress={() => setShowModal(true)}
+          flexDir="row"
+          alignItems="center"
+          borderWidth={1}
+          borderRadius={5}
+          _pressed={{ backgroundColor: theme.colors.gray[50] }}
+          paddingX={4}
+          paddingY={2}
+          borderColor="primary.200"
+        >
+          <Ionicons
+            name="md-add-sharp"
+            size={24}
+            color={theme.colors.primary[300]}
+          />
+          <Text marginLeft={2}>Add New List</Text>
+        </Pressable>
+      </Center>
+      <Modal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        animationPreset="slide"
+        bg="white"
+        opacity={90}
+      >
+        <AddListModal />
+      </Modal>
+      <Modal
+        isOpen={showListModal}
+        onClose={() => setShowListModal(false)}
+        animationPreset="slide"
+        bg="white"
+      >
+        <ToDoModal list={list} />
+      </Modal>
+    </>
   );
 }

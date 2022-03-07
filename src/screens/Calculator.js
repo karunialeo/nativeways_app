@@ -32,13 +32,13 @@ export default function Calculator() {
         marginBottom={4}
         flexDir="column"
         justifyContent="space-between"
-        bg="gray.200"
+        bg="primary.100"
         height={32}
         paddingX={5}
         paddingY={3}
         borderColor="white"
       >
-        <Text color="gray.500" fontSize="2xl" fontFamily="Poppins">
+        <Text color="primary.500" fontSize="2xl" fontFamily="Poppins">
           {operation}
         </Text>
         <Text
@@ -57,7 +57,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 16, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => {
               setOperation(0);
               setResult(null);
@@ -68,7 +68,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => erase()}
           >
             ←
@@ -76,7 +76,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator("(")}
           >
             (
@@ -84,7 +84,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator(")")}
           >
             )
@@ -116,7 +116,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator("+")}
           >
             +
@@ -148,7 +148,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator("-")}
           >
             -
@@ -180,7 +180,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator("*")}
           >
             *
@@ -205,7 +205,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => countResult()}
           >
             =
@@ -213,7 +213,7 @@ export default function Calculator() {
           <Button
             flex={1}
             _text={{ fontSize: 20, color: "white" }}
-            bg="gray.400"
+            bg="primary.500"
             onPress={() => insertOperator("/")}
           >
             /
