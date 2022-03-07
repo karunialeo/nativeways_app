@@ -1,7 +1,7 @@
 export const tempDB = [
   {
-    name: "School",
     id: 1,
+    name: "School",
     subtitle:
       "Lorem ipsum icabo itaque earum consequatur laudantium distinctio quidem sed molestias! dolor sit amet consectetur adipisicing elit. Deserunt, nisi ea expl",
     number: 30,
@@ -9,61 +9,49 @@ export const tempDB = [
     todos: [
       {
         title: "Math Homework",
-        id: 1,
         completed: true,
       },
       {
         title: "Meet With Hendry at 8AM",
-        id: 2,
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 3,
+        title: "Meet With ujang at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 4,
+        title: "Meet With mahmud at 8AM",
         completed: false,
       },
       {
         title: "Meet With Leo at 4PM",
-        id: 5,
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 6,
+        title: "Meet With kevin at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 7,
+        title: "Meet With subhan at 4PM",
         completed: true,
       },
       {
-        title: "Math Homework",
-        id: 28,
+        title: "Indonesian Homework",
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 29,
+        title: "Meet With Oscar at 8AM",
         completed: true,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 30,
+        title: "Meet With Pass at 8AM",
         completed: false,
       },
     ],
-    remaining: 5,
-    completed: 2,
   },
   {
-    name: "Client Meetup",
     id: 2,
+    name: "Client Meetup",
     subtitle:
       "Lorem ipsum dolor sit amet consecte tinctio quidem sed molestias! tur adipisicing elit. Deserunt, nisi ea explicabo itaque earum consequatur laudantium dis",
     number: 22,
@@ -71,26 +59,21 @@ export const tempDB = [
     todos: [
       {
         title: "Meet With Client Random at 4PM",
-        id: 8,
         completed: true,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 9,
+        title: "Meet With passyah at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 10,
+        title: "Meet With rob at 8AM",
         completed: false,
       },
     ],
-    remaining: 5,
-    completed: 2,
   },
   {
-    name: "Homework",
     id: 3,
+    name: "Homework",
     subtitle:
       "tium distinctio Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, nisi ea explicabo itaque earum consequatur laudan quidem sed molestias!",
     number: 32,
@@ -98,32 +81,26 @@ export const tempDB = [
     todos: [
       {
         title: "Science Homework",
-        id: 11,
         completed: true,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 12,
+        title: "Meet With robby at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 13,
+        title: "Meet With asep at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 14,
+        title: "Meet With leomon at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 15,
+        title: "Meet With andi at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 16,
+        title: "Meet With andy at 4PM",
         completed: true,
       },
     ],
@@ -131,36 +108,31 @@ export const tempDB = [
     completed: 2,
   },
   {
-    name: "Meetings",
     id: 4,
+    name: "Meetings",
     subtitle:
       "Lorem ipsum dolor sit amet consectetuinctio quidem sed molestias!r adipisicing elit. Deserunt, nisi ea explicabo itaque earum consequatur laudantium dist",
     number: 14,
     color: "yellow.400",
     todos: [
       {
-        title: "Meet With Leo at 4PM",
-        id: 17,
+        title: "Meet With willy at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 18,
+        title: "Meet With ing at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 19,
+        title: "Meet With robby at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 20,
+        title: "Meet With babat at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 21,
+        title: "Meet With sapei at 4PM",
         completed: true,
       },
     ],
@@ -168,8 +140,8 @@ export const tempDB = [
     completed: 2,
   },
   {
-    name: "Others",
     id: 5,
+    name: "Others",
     subtitle:
       "Lorem ipsum nsectetur adipisicing elit. Deserunt, nisi ea explicabo itaque earum consequatur laudantium distinctio qu dolor sit amet coidem sed molestias!",
     number: 43,
@@ -177,32 +149,26 @@ export const tempDB = [
     todos: [
       {
         title: "Give food to cat",
-        id: 22,
         completed: true,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 23,
+        title: "Meet With saepudin at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Hendry at 8AM",
-        id: 24,
+        title: "Meet With rohman at 8AM",
         completed: false,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 25,
+        title: "Meet With nike at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 26,
+        title: "Meet With vanky at 4PM",
         completed: true,
       },
       {
-        title: "Meet With Leo at 4PM",
-        id: 27,
+        title: "Meet With ivan at 4PM",
         completed: true,
       },
     ],

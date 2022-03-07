@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "native-base";
 
-import ToDoList from "./src/screens/ToDoList";
+import ToDoListContainer from "./src/screens/ToDoListContainer";
 import Calculator from "./src/screens/Calculator";
 import More from "./src/screens/More";
 
@@ -46,7 +46,7 @@ function NativeWays() {
         tabBarInactiveBackgroundColor: theme.colors.white,
       })}
     >
-      <Tab.Screen name="To Do Lists" component={ToDoList} />
+      <Tab.Screen name="To Do Lists" component={ToDoListContainer} />
       <Tab.Screen name="Calculator" component={Calculator} />
       <Tab.Screen name="More" component={More} />
     </Tab.Navigator>
