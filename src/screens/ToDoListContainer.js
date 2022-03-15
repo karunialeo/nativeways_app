@@ -1,16 +1,41 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Text, View, Pressable, FlatList, Modal } from "native-base";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { tempDB } from "../../tempData/tempDB";
 import ToDoList from "../components/ToDoList";
 import AddListModal from "../components/AddListModal";
+import Fire from "../../Fire";
 
 export default class ToDoListContainer extends React.Component {
   state = {
     addToDoVisible: false,
-    lists: tempDB,
+    lists: [],
+    user: {},
+    loading: true,
   };
+
+  componentDidMount() {
+    firebase = new Fire((error, user) => {
+      if (error) {
+        return alert("Uh oh! Something went wrong");
+      }
+
+      firebase.getLists((lists) => {
+        this.setState({ lists, user }, () => {
+          this.setState({ loading: false });
+        });
+      });
+
+      this.setState({ user });
+    });
+  }
+
+  componentWillUnmount() {
+    firebase.detach();
+    return () => {
+      firebase.detach();
+    };
+  }
 
   toggleAddToDoModal() {
     this.setState({ addToDoVisible: !this.state.addToDoVisible });
@@ -20,27 +45,39 @@ export default class ToDoListContainer extends React.Component {
   }
 
   renderList = (list) => {
-    return <ToDoList list={list} updateList={this.updateList} />;
+    return (
+      <ToDoList
+        list={list}
+        updateList={this.updateList}
+        deleteList={this.deleteList}
+      />
+    );
   };
 
   addList = (list) => {
-    this.setState({
-      lists: [
-        ...this.state.lists,
-        { ...list, id: this.state.lists.length + 1, todos: [] },
-      ],
+    firebase.addList({
+      name: list.name,
+      color: list.color,
+      todos: [],
     });
   };
 
   updateList = (list) => {
-    this.setState({
-      lists: this.state.lists.map((item) => {
-        return item.id === list.id ? list : item;
-      }),
-    });
+    firebase.updateList(list);
+  };
+
+  deleteList = (list) => {
+    firebase.deleteList(list);
   };
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="blue" />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <Modal
@@ -54,6 +91,9 @@ export default class ToDoListContainer extends React.Component {
             addList={this.addList}
           />
         </Modal>
+        {/* <View>
+          <Text>User: {this.state.user.uid}</Text>
+        </View> */}
         <View style={{ marginBottom: 32 }}>
           <Pressable
             style={styles.addList}
@@ -65,15 +105,22 @@ export default class ToDoListContainer extends React.Component {
           <Text style={styles.add}>Add List</Text>
         </View>
 
-        <View style={{ height: 275, paddingLeft: 32 }}>
-          <FlatList
-            data={this.state.lists}
-            keyExtractor={(item) => item.name}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => this.renderList(item)}
-            keyboardShouldPersistTaps="always"
-          />
+        <View style={{ height: 275, paddingLeft: 10 }}>
+          {this.state.lists.length > 0 ? (
+            <FlatList
+              data={this.state.lists}
+              keyExtractor={(item) => item.id.toString()}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => this.renderList(item)}
+              keyboardShouldPersistTaps="always"
+            />
+          ) : (
+            <View>
+              <Text textAlign="center">No To Do Lists.</Text>
+              <Text textAlign="center">Click button above to add list.</Text>
+            </View>
+          )}
         </View>
       </View>
     );

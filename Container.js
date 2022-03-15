@@ -7,7 +7,6 @@ import { useTheme } from "native-base";
 
 import ToDoListContainer from "./src/screens/ToDoListContainer";
 import Calculator from "./src/screens/Calculator";
-import More from "./src/screens/More";
 
 // Create Stack Navigation
 const Stack = createStackNavigator();
@@ -48,7 +47,6 @@ function NativeWays() {
     >
       <Tab.Screen name="To Do Lists" component={ToDoListContainer} />
       <Tab.Screen name="Calculator" component={Calculator} />
-      <Tab.Screen name="More" component={More} />
     </Tab.Navigator>
   );
 }

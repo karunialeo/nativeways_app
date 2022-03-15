@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Keyboard } from "react-native";
+import { StyleSheet, Keyboard, Animated } from "react-native";
 import {
   Pressable,
   Input,
@@ -24,36 +24,55 @@ export default class ToDoModal extends React.Component {
 
   addToDo = () => {
     let list = this.props.list;
-    list.todos.push({ title: this.state.newToDo, completed: false });
 
-    this.props.updateList(list);
+    if (!list.todos.some((todo) => todo.title === this.state.newToDo)) {
+      list.todos.push({ title: this.state.newToDo, completed: false });
+
+      this.props.updateList(list);
+    } else {
+      alert("Cannot create To Do with exact name");
+    }
+
     this.setState({ newToDo: "" });
 
     Keyboard.dismiss();
   };
 
+  deleteToDo = (index) => {
+    let list = this.props.list;
+
+    list.todos.splice(index, 1);
+
+    this.props.updateList(list);
+  };
+
   renderToDo = (todo, index) => {
     return (
-      <View paddingY={2} flexDir="row" alignItems="center">
-        <Pressable
-          marginRight={3}
-          onPress={() => this.toggleToDoCompleted(index)}
-        >
-          <Ionicons
-            name={todo.completed ? "ios-square-sharp" : "ios-square-outline"}
-            size={24}
-            color="gray"
-          />
+      <View flexDir="row" alignItems="center" justifyContent="space-between">
+        <View paddingY={2} flexDir="row" alignItems="center">
+          <Pressable
+            marginRight={3}
+            onPress={() => this.toggleToDoCompleted(index)}
+          >
+            <Ionicons
+              name={todo.completed ? "ios-square-sharp" : "ios-square-outline"}
+              size={24}
+              color="gray"
+            />
+          </Pressable>
+          <Text
+            style={[
+              styles.todo,
+              { textDecorationLine: todo.completed ? "line-through" : "none" },
+            ]}
+            color={todo.completed ? "gray.400" : "black"}
+          >
+            {todo.title}
+          </Text>
+        </View>
+        <Pressable onPress={() => this.deleteToDo(index)}>
+          <Ionicons name="trash" size={24} color="red" />
         </Pressable>
-        <Text
-          style={[
-            styles.todo,
-            { textDecorationLine: todo.completed ? "line-through" : "none" },
-          ]}
-          color={todo.completed ? "gray.400" : "black"}
-        >
-          {todo.title}
-        </Text>
       </View>
     );
   };
