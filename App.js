@@ -1,4 +1,5 @@
 import { extendTheme, NativeBaseProvider, StatusBar } from "native-base";
+import { LogBox } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { SSRProvider } from "@react-aria/ssr";
@@ -25,6 +26,8 @@ import {
   AddListModalProvider,
   ShowListModalProvider,
 } from "./src/contexts/ModalContext";
+
+LogBox.ignoreLogs(["Setting a timer for a long period of time"]);
 
 export default function App() {
   let [fontsLoaded] = useFonts({
